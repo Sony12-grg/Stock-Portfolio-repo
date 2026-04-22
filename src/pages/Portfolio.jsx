@@ -1,11 +1,18 @@
-import React from 'react'
-
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { deleteStock } from "../redux/stockSlice.js";
+import { Link } from "react-router-dom";
 export default function Portfolio() {
+  const stocks = useSelector(state => state.stocks.stocks);
+  const dispatch = useDispatch();
+
   return (
     <div className='p-5'>
       <h2 className='text-xl font-semibold mb-4'>My Portfolio</h2>
       <div className='overflow-x-auto'>
-        <button className='bg-green-500 text-white px-4 py-2 rounded mb-3'>Add Stock</button>
+        <Link to="/add-stock" className='mb-4'>
+           <button className='bg-green-500 text-white px-4 py-2 rounded mb-3'> + Add Stock</button>
+        </Link>
          <table className='min-w-full border-gray-300'>
           <thead className='bg-gray-200'>
             <tr>
@@ -19,19 +26,20 @@ export default function Portfolio() {
           </thead>
           <tbody>
             {
-              [
-                {ticker: "AAPL", name: "Apple", qty:10, buy: 100, current:120},
-                {ticker: "GOOGL", name: "Alphabet", qty:5, buy: 1500, current: 1800},
-              ].map((stock, index) => (
-                <tr key={index} className='text-center border-t border-gray-500'>
+              stocks.map((stock) => (
+                <tr key={stock.id} className='text-center border-t border-gray-500'>
                   <td className='p-2'>{stock.ticker}</td>
                   <td className='p-2'>{stock.name}</td>
                   <td className='p-2'>{stock.qty}</td>
                   <td className='p-2'>${stock.buy.toFixed(2)}</td>
                   <td className='p-2'>${stock.current.toFixed(2)}</td>
                   <td className='p-2'>
-                    <button className='bg-blue-500 text-white px-4 py-2 rounded mr-2'>Edit</button>
-                    <button className='bg-red-500 text-white px-4 py-2 rounded'>Delete</button>
+                    <Link to={`/edit-stock/${stock.id}`}>
+                      <button className='bg-blue-500 text-white px-4 py-2 rounded mr-2'>Edit</button>
+                    </Link>
+                    <button
+                        onClick={() => dispatch(deleteStock(stock.id))}
+                     className='bg-red-500 text-white px-4 py-2 rounded'>Delete</button>
                   </td>
                 </tr>
               ))
