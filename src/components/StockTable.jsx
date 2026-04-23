@@ -105,10 +105,9 @@ export default function StockTable() {
               <tr key={row.id} className="text-center border-t">
                 {row.getVisibleCells().map(cell => (
                   <td key={cell.id} className="p-2">
-                    {flexRender(
-                      cell.column.columnDef.cell ?? cell.column.columnDef.accessorKey,
-                      cell.getContext()
-                    )}
+                    {cell.column.columnDef.cell
+                      ? flexRender(cell.column.columnDef.cell, cell.getContext())
+                      : String(cell.getValue())}
                   </td>
                 ))}
               </tr>

@@ -7,4 +7,11 @@ export default defineConfig({
   plugins: [react(),
        tailwindcss(),
   ],
+   test: {
+    environment: 'jsdom',
+    globals: true,
+    test: {
+  setupFiles: ["@testing-library/jest-dom/vitest"], // runs before every test file
+}
+  },
 })
