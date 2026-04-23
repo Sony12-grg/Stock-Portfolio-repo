@@ -33,9 +33,7 @@ npm run dev
 The app will be running at http://localhost:5173
 
 🧪 Running Tests
-bashnpm run test
-To run tests with UI:
-bashnpm run test:ui
+npm run test
 
 📁 Folder Structure
 src/
