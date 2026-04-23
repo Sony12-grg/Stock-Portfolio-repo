@@ -21,7 +21,6 @@ npm v9 or higher
 Steps
 bash# 1. Clone the repository
 git clone (https://github.com/Sony12-grg/Stock-Portfolio-repo)
-cd stock-portfolio
 
 # 2. Install dependencies
 
