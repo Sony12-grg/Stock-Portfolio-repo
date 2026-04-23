@@ -3,16 +3,14 @@ A React-based frontend application for visualising and managing a personal stock
 
 🚀 Features
 
-Portfolio Table — built with TanStack Table (sorting, filtering)
+Portfolio Table — built with TanStack Table
 Add / Edit / Delete Stocks — with Formik + Yup validation on both forms
 Charts — Line chart (price trend) and Bar chart (gain/loss per stock)
-Summary Stats — total portfolio value, total gain/loss at a glance
 Colour-coded rows — green for profit, red for loss
-LocalStorage persistence — portfolio survives page refresh
 Responsive — works on all screen sizes
 
 🛠 Tech Stack
-ConcernLibraryUI FrameworkReact 19 (functional components + hooks)State ManagementRedux ToolkitTableTanStack Table v8Forms & ValidationFormik + YupChartsChart.js + react-chartjs-2StylingTailwind CSS v4RoutingReact Router DOM v7Persistenceredux-persist + localStorageTestingVitest + @testing-library/react
+ConcernLibraryUI FrameworkReact 19 (functional components + hooks)State ManagementRedux ToolkitTableTanStack Table v8Forms & ValidationFormik + YupChartsChart.js + react-chartjs-2StylingTailwind CSS v4RoutingReact Router DOM  @testing-library/react
 
 📦 Installation & Setup
 Prerequisites
@@ -22,7 +20,7 @@ npm v9 or higher
 
 Steps
 bash# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/stock-portfolio.git
+git clone (https://github.com/Sony12-grg/Stock-Portfolio-repo)
 cd stock-portfolio
 
 # 2. Install dependencies
@@ -47,7 +45,7 @@ src/
 │ ├── StockTable.jsx # Portfolio table (TanStack Table)
 │ ├── BarChart.jsx # Gain/Loss bar chart
 │ ├── LineChart.jsx # Price trend line chart
-│ └── SummaryStats.jsx # Portfolio summary cards
+│ 
 ├── data/
 │ └── mockData.js # Static trend data for line chart
 ├── pages/
@@ -58,24 +56,15 @@ src/
 ├── tests/
 │ ├── stockSlice.test.js # Redux slice unit tests
 │ └── StockTable.test.jsx # Component tests
+  └── AddStock.test.jsx 
 ├── App.jsx
 ├── main.jsx
 └── index.css
 
 📝 Commit History (task-wise)
-feat: initialise Vite + React project
-feat: add Redux store and stock slice
-feat: add portfolio table with TanStack Table
-Date of purchase update
-
-Addes Jest-Test
-
-feat: add AddStock form with Formik + Yup validation
-feat: add EditStock form with Formik + Yup validation
-feat: add delete stock functionality
-feat: add Bar chart and Line chart with Chart.js
-feat: add SummaryStats component
-feat: add localStorage persistence with redux-persist
-feat: add filter and sort to portfolio table
-feat: add unit tests for stock slice and table component
-style: improve UI with Tailwind CSSSt
+1: initialise Vite + React project
+2: add Redux store and stock slice
+3: add portfolio table with TanStack Table
+4: Date of purchase update
+5: Added Jest-Test
+6: 
