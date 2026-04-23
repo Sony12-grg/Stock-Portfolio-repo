@@ -62,9 +62,9 @@ src/
 └── index.css
 
 📝 Commit History (task-wise)
-1: initialise Vite + React project
-2: add Redux store and stock slice
-3: add portfolio table with TanStack Table
+1: vite setup and added portfolio table UI
+2: implemented edit, delete and add functionality,
+3: implemented bar and line chart using chart.js
 4: Date of purchase update
 5: Added Jest-Test
-6: 
+6: Final addition to make good look of UI,
