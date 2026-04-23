@@ -18,7 +18,8 @@ export default function StockFormEdit() {
     name: "",
     qty: 0,
     buy: 0,
-    current: 0
+    current: 0,
+    date: ""
   });
 
   useEffect(() => {
@@ -37,7 +38,8 @@ export default function StockFormEdit() {
       id: stockId,
       qty: Number(form.qty),
       buy: Number(form.buy),
-      current: Number(form.current)
+      current: Number(form.current),
+      date: form.date
     };
 
     dispatch(updateStock(updatedStock));
@@ -108,6 +110,18 @@ export default function StockFormEdit() {
             type="number"
             name="current"
             value={form.current}
+            onChange={handleChange}
+            className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+        </div>
+
+        {/* Purchase Date */}
+        <div className="flex flex-col">
+          <label className="text-sm text-gray-600">Purchase Date</label>
+          <input
+            type="date"
+            name="date"
+            value={form.date}
             onChange={handleChange}
             className="border rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />

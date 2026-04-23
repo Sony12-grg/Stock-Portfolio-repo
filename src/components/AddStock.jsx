@@ -9,7 +9,8 @@ const stockSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   qty: Yup.number().required("Quantity is required").positive("Quantity must be a positive number"),
   buy: Yup.number().required("Buy price is required").positive("Buy price must be a positive number"),
-  current: Yup.number().required("Current price is required").positive("Current price must be a positive number")
+  current: Yup.number().required("Current price is required").positive("Current price must be a positive number"),
+  date: Yup.string().required("Date is required")
 });
 
 export default function AddStock() {
@@ -23,11 +24,15 @@ export default function AddStock() {
           name: "",
           qty: 0,
           buy: 0,
-          current: 0
+          current: 0,
+           date: ""
         }}
         validationSchema={stockSchema}
         onSubmit = {(values) => {
-           dispatch(addStock(values));
+          dispatch(addStock({
+          id: Date.now(),
+          ...values
+      }));
             navigate("/");
         }}
       >
@@ -48,7 +53,7 @@ export default function AddStock() {
                />
                {errors.ticker && touched.ticker && <div className="text-red-500">{errors.ticker}</div>}
              </div>
-
+             {/* Name */}
              <div className="flex flex-col">
                <label htmlFor="name">Name</label>
                <input
@@ -63,6 +68,7 @@ export default function AddStock() {
                {errors.name && touched.name && <div className="text-red-500">{errors.name}</div>}
           
              </div>
+             {/* Quantity */}
              <div className="flex flex-col">
               <label htmlFor="qty">Quantity</label>
               <input
@@ -76,6 +82,8 @@ export default function AddStock() {
                />
                {errors.qty && touched.qty && <div className="text-red-500">{errors.qty}</div>}
              </div>
+
+             {/* Buy Price */}
              <div className="flex flex-col">
               <label htmlFor="buy">Buy Price</label>
               <input
@@ -89,6 +97,8 @@ export default function AddStock() {
               />
               {errors.buy && touched.buy && <div className="text-red-500">{errors.buy}</div>}
              </div>
+
+             {/* Current Price */}
              <div className="flex flex-col">
                <label htmlFor="current">Current Price</label>
                <input
@@ -102,6 +112,21 @@ export default function AddStock() {
                 className="border rounded-md p-2 focus:outline-none border-gray-500"
                />
                {errors.current && touched.current && <div className="text-red-500">{errors.current}</div>}
+             </div>
+
+             {/* Date of Purchase */}
+             <div className="flex flex-col">
+              <label htmlFor="date">Date of Purchase</label>
+              <input
+               id="date"
+               name="date"
+               type="date"
+               onChange={handleChange}
+               value={values.date}
+               className="border rounded-md p-2 focus:outline-none border-gray-500"
+              />
+              {errors.date && touched.date && ( <div className="text-red-500">{errors.date}</div>
+             )}
              </div>
              <button type="submit"    className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-md transition">
               Add

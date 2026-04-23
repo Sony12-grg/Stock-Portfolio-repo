@@ -12,7 +12,7 @@ export default function App() {
         {/* Routing */}
         <Routes>
           <Route path="/" element={<Portfolio />} />
-          <Route path="/add-stock" element={AddStock()} />
+          <Route path="/add-stock" element={<AddStock/>} />
           <Route path="/edit-stock/:id" element={<StockFormEdit />} />
 
         </Routes>

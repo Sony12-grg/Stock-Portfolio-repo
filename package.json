@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.2.4",
+    "@tanstack/react-table": "^8.21.3",
     "chart.js": "^4.5.1",
     "formik": "^2.4.9",
     "react": "^19.2.5",

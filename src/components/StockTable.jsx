@@ -1,51 +1,122 @@
-import React from 'react'
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { deleteStock } from "../redux/stockSlice.js";
+import React, { useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteStock } from "../redux/stockSlice";
 import { Link } from "react-router-dom";
+
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender
+} from "@tanstack/react-table";
+
 export default function StockTable() {
-    const stocks = useSelector(state => state.stocks.stocks);
+  const stocks = useSelector(state => state.stocks.stocks);
   const dispatch = useDispatch();
+
+  // Define columns
+  const columns = useMemo(() => [
+    {
+      header: "Ticker",
+      accessorKey: "ticker",
+    },
+    {
+      header: "Company",
+      accessorKey: "name",
+    },
+    {
+      header: "Quantity",
+      accessorKey: "qty",
+    },
+    {
+      header: "Buy Price",
+      accessorKey: "buy",
+      cell: info => `$${info.getValue().toFixed(2)}`
+    },
+    {
+      header: "Current Price",
+      accessorKey: "current",
+      cell: info => `$${info.getValue().toFixed(2)}`
+    },
+    {
+     header: "Purchase Date",
+     accessorKey: "date",
+    },
+    {
+      header: "Actions",
+      cell: ({ row }) => {
+        const stock = row.original;
+        return (
+          <div className="flex justify-center gap-2">
+            <Link to={`/edit-stock/${stock.id}`}>
+              <button className="bg-blue-500 text-white px-3 py-1 rounded">
+                Edit
+              </button>
+            </Link>
+
+            <button
+              onClick={() => dispatch(deleteStock(stock.id))}
+              className="bg-red-500 text-white px-3 py-1 rounded"
+            >
+              Delete
+            </button>
+          </div>
+        );
+      }
+    }
+  ], [dispatch]);
+
+  // Create table instance
+  const table = useReactTable({
+    data: stocks,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
   return (
-    <div>
-       <div className='overflow-x-auto'>
-        <Link to="/add-stock" className='mb-4'>
-           <button className='bg-green-500 text-white px-4 py-2 rounded mb-3'> + Add Stock</button>
-        </Link>
-         <table className='min-w-full border-gray-300'>
-          <thead className='bg-gray-200'>
-            <tr>
-              <th className='p-2'>Ticker</th>
-              <th className='p-2'>Company</th>
-              <th className='p-2'>Quantity</th>
-              <th className='p-2'>Buy Price</th>
-              <th className='p-2'>Current Price</th>
-              <th className='p-2'>Actions</th>
-            </tr>
+    <div className="p-4">
+      <Link to="/add-stock">
+        <button className="bg-green-500 text-white px-4 py-2 rounded mb-3">
+          + Add Stock
+        </button>
+      </Link>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-300">
+          
+          {/* HEADER */}
+          <thead className="bg-gray-200">
+            {table.getHeaderGroups().map(headerGroup => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map(header => (
+                  <th key={header.id} className="p-2">
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
           </thead>
+
+          {/* BODY */}
           <tbody>
-            {
-              stocks.map((stock) => (
-                <tr key={stock.id} className='text-center border-t border-gray-500'>
-                  <td className='p-2'>{stock.ticker}</td>
-                  <td className='p-2'>{stock.name}</td>
-                  <td className='p-2'>{stock.qty}</td>
-                  <td className='p-2'>${stock.buy.toFixed(2)}</td>
-                  <td className='p-2'>${stock.current.toFixed(2)}</td>
-                  <td className='p-2'>
-                    <Link to={`/edit-stock/${stock.id}`}>
-                      <button className='bg-blue-500 text-white px-4 py-2 rounded mr-2'>Edit</button>
-                    </Link>
-                    <button
-                        onClick={() => dispatch(deleteStock(stock.id))}
-                     className='bg-red-500 text-white px-4 py-2 rounded'>Delete</button>
+            {table.getRowModel().rows.map(row => (
+              <tr key={row.id} className="text-center border-t">
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id} className="p-2">
+                    {flexRender(
+                      cell.column.columnDef.cell ?? cell.column.columnDef.accessorKey,
+                      cell.getContext()
+                    )}
                   </td>
-                </tr>
-              ))
-            }
+                ))}
+              </tr>
+            ))}
           </tbody>
-         </table>
+
+        </table>
       </div>
     </div>
-  )
+  );
 }
