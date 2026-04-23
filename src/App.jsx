@@ -1,8 +1,8 @@
 import React from 'react'
 import Portfolio from './pages/Portfolio.jsx'
 import { Routes, Route } from 'react-router-dom'
-import stockform from './components/stockForm.jsx'
-import StockFormEdit from './components/stockEdit.jsx'
+import StockFormEdit from './components/StockFormEdit.jsx'
+import AddStock from './components/AddStock.jsx'
 
 export default function App() {
   return (
@@ -12,9 +12,11 @@ export default function App() {
         {/* Routing */}
         <Routes>
           <Route path="/" element={<Portfolio />} />
-          <Route path="/add-stock" element={stockform()} />
+          <Route path="/add-stock" element={AddStock()} />
           <Route path="/edit-stock/:id" element={<StockFormEdit />} />
+
         </Routes>
+        
       
     </div>
   )

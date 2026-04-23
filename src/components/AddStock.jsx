@@ -12,7 +12,7 @@ const stockSchema = Yup.object({
   current: Yup.number().required("Current price is required").positive("Current price must be a positive number")
 });
 
-export default function StockForm() {
+export default function AddStock() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
