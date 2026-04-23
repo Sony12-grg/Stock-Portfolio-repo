@@ -30,12 +30,12 @@ export default function StockTable() {
     {
       header: "Buy Price",
       accessorKey: "buy",
-      cell: info => `$${info.getValue().toFixed(2)}`
+      cell: info => `${info.getValue().toFixed(2)}`
     },
     {
       header: "Current Price",
       accessorKey: "current",
-      cell: info => `$${info.getValue().toFixed(2)}`
+      cell: info => `${info.getValue().toFixed(2)}`
     },
     {
      header: "Purchase Date",

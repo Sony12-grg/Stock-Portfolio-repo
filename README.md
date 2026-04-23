@@ -68,6 +68,8 @@ feat: add Redux store and stock slice
 feat: add portfolio table with TanStack Table
 Date of purchase update
 
+Addes Jest-Test
+
 feat: add AddStock form with Formik + Yup validation
 feat: add EditStock form with Formik + Yup validation
 feat: add delete stock functionality

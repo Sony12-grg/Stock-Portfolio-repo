@@ -6,8 +6,8 @@ import AddStock from './components/AddStock.jsx'
 
 export default function App() {
   return (
-    <div className='p-5'>
-       <h1 className="text-3xl font-bold ">
+    <div className='p-5 min-h-screen bg-gray-950'>
+       <h1 className="text-2xl font-bold font-mono text-white bg-gray-900 border-b border-gray-800 px-6 py-4">
         Stock Portfolio App</h1>
         {/* Routing */}
         <Routes>
